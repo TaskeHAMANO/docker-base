@@ -71,7 +71,7 @@ RUN sudo apt-get update \
     seaborn \
     openpyxl \
     nodejs \
-    "plotly>=4.0" \
+    # "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
@@ -86,8 +86,8 @@ RUN sudo apt-get update \
     tensorly \
     matminer\
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
-    && jupyter labextension install --no-build @jupyterlab/plotly-extension \
-    && jupyter labextension install --no-build jupyterlab-chart-editor \
+    # && jupyter labextension install --no-build @jupyterlab/plotly-extension \
+    # && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
     && jupyter nbextension enable --py widgetsnbextension \
     && reentry scan \
