@@ -62,7 +62,6 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    jupyter=1.0.0 \
     scikit-learn=0.21.3 \
     scipy=1.3.1 \
     pandas=0.25.2 \
@@ -78,7 +77,8 @@ RUN sudo apt-get update \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
-    jupyterlab==1.0.0 \
+    jupyter==1.0.0 \
+    jupyterlab==1.2.4 \
     pybtex \
     mordred \
     torchtext \
