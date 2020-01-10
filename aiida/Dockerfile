@@ -62,35 +62,34 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    scikit-learn=0.21.3 \
-    scipy=1.3.1 \
-    pandas=0.25.2 \
+    scikit-learn=0.22.1 \
+    scipy=1.4.1 \
+    pandas=0.25.3 \
     requests \
     joblib \
     seaborn \
     openpyxl \
     nodejs \
-    # "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
-    jupyter==1.0.0 \
-    jupyterlab==1.2.4 \
+    jupyterlab \
+    plotly \
     pybtex \
     mordred \
     torchtext \
     Python-Deprecated \
     tensorly \
     matminer\
+    && reentry scan \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
-    # && jupyter labextension install --no-build @jupyterlab/plotly-extension \
-    # && jupyter labextension install --no-build jupyterlab-chart-editor \
+    && jupyter labextension install --no-build @jupyterlab/plotly-extension \
+    && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
     && jupyter nbextension enable --py widgetsnbextension \
-    && reentry scan \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
