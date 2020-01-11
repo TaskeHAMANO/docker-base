@@ -63,7 +63,7 @@ RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
     scikit-learn=0.22.1 \
-    scipy=1.4.1 \
+    scipy=1.3.1 \
     pandas=0.25.3 \
     requests \
     joblib \
