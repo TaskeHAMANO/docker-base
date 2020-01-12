@@ -77,6 +77,8 @@ RUN sudo apt-get update \
     git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
     jupyterlab \
+    ipywidgets \
+    widgetsnbextension \
     plotly \
     pybtex \
     mordred \
