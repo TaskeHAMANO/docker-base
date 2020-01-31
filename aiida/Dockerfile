@@ -64,18 +64,19 @@ RUN sudo apt-get update \
     && conda install -y \
     scikit-learn=0.22.1 \
     scipy=1.3.1 \
-    pandas=0.25.3 \
+    pandas=1.0.0 \
     requests \
     joblib \
     seaborn \
     openpyxl \
     nodejs \
     && conda clean -ya \
-    && pip install --no-cache-dir \
+    && pip install -U \
     git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
-    && pip install --no-cache-dir \
+    && pip install -U \
     git+https://github.com/aiidateam/aiida-quantumespresso \
-    && pip install --no-cache-dir \
+    && reentry scan \
+    && pip install \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
@@ -86,7 +87,6 @@ RUN sudo apt-get update \
     Python-Deprecated \
     tensorly \
     matminer\
-    && reentry scan \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
