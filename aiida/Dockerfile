@@ -92,8 +92,8 @@ RUN sudo apt-get update \
     matminer \
     && reentry scan \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
-    && jupyter labextension install --no-build jupyterlab-plotly 
-#     && jupyter labextension install --no-build jupyterlab-chart-editor \
+    && jupyter labextension install --no-build jupyterlab-plotly \
+    # && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
     && jupyter nbextension enable --py widgetsnbextension \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
