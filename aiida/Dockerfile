@@ -42,39 +42,58 @@ ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
-# # install ppytorch 1.0.0 with CUDA 10.0
-# # use CUDA 10.0-specific steps
-# RUN conda install -y -c pytorch \
-#     cudatoolkit=10.1 \
-#     magma-cuda101=2.5.1 \
-#     pytorch=1.4.0 \
-#     torchtext=0.5.0 \
-#     torchvision=0.5.0 &&\
-#     conda clean -ya && \
-#     python -c "import torch; print('pytorch %s' % torch.__version__)"
+# install ppytorch 1.0.0 with CUDA 10.0
+# use CUDA 10.0-specific steps
+RUN conda install -y -c pytorch \
+    cudatoolkit=10.1 \
+    magma-cuda101=2.5.1 \
+    pytorch=1.4.0 \
+    torchtext=0.5.0 \
+    torchvision=0.5.0 &&\
+    conda clean -ya && \
+    python -c "import torch; print('pytorch %s' % torch.__version__)"
 
-# # install rdkit and pymatgen
-# RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
-#     conda clean -ya && \
-#     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
+# install rdkit and pymatgen
+RUN conda install -y -c rdkit rdkit=2020.03.1.0 &&\
+    conda clean -ya && \
+    python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
-    && pip install -U \
-    git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
-    && pip install -U \
-    git+https://github.com/aiidateam/aiida-quantumespresso \
-    && pip install -U \
+    && conda install -y \
+    scikit-learn=0.22.1 \
+    scipy=1.4.1 \
+    pandas=1.0.3 \
+    requests \
+    joblib \
+    lz4 \
+    seaborn \
+    openpyxl \
+    nodejs \
+    && conda clean -ya \
+    && pip install --upgrade --no-cache-dir \
+    git+https://github.com/stanfordmlgroup/ngboost.git \
+    && pip install --no-cache-dir \
+    aiida-core \
+    aiida-quantumespresso \
+    aiida-vasp \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
-    && conda install -y nodejs \
-    && conda clean -ya \
+    fastcluster \
+    xgboost \
+    plotly \
+    pybtex \
+    mordred \
+    torchtext \
+    Python-Deprecated \
+    tensorly \
+    matminer \
     && reentry scan \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
-    && jupyter labextension install --no-build @jupyterlab/plotly-extension \
-    && jupyter labextension install --no-build jupyterlab-chart-editor \
+    && jupyter labextension install --no-build jupyterlab-plotly 
+#     && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
     && jupyter nbextension enable --py widgetsnbextension \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
